@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Stevens Senior Design Marketplace</title>
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="{{url_for('static', filename='custom.css') }}">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #9D1535;">
+      <a class="navbar-brand" href="/projects">SDMarketplace</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <!--<li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>-->
+          <li class="nav-item">
+            <a class="nav-link" href="/projects">Projects</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/createProposal">Submit Proposal</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/createProject">Create Project</a>
+          </li>
+
+          <!--<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>-->
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+	<div class="card">
+	<div class="card-body">
+	<form>
+	<h5 class="card-title">Create Project</h5>
+	
+	<div class="input-group mb-3">
+	  <input type="text" class="form-control" id='title' placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+	</div>
+
+	<div class="input-group mb-3">
+	  <textarea class="form-control" placeholder="Description" aria-label="Description"></textarea>
+	</div>
+
+	<div class="input-group mb-3">
+	  <input type="text" class="form-control" placeholder="Sponsor(s)" aria-label="Sponsor(s)" data-toggle="tooltip" data-placement="left" title="Comma seperated if multiple, if none leave blank" aria-describedby="basic-addon1">
+	</div>
+	
+	<div class="input-group mb-3">
+	  <select id='majors' class="selectpicker" title="Majors Desired" data-width="100%" data-live-search="true">
+		<optgroup label="Engineering">
+		  <option>Biomedical</option>
+		  <option>Chemical</option>
+		  <option>Civil</option>
+		  <option>Computer</option>
+		  <option>Electrical</option>
+		  <option>Environmental</option>
+		  <option>Management</option>
+		  <option>Mechanical</option>
+		  <option>Naval</option>
+		  <option>Software</option>
+		  <option>Systems</option>
+		</optgroup>
+		<optgroup label="Sciences">
+		</optgroup>
+	  </select>
+	</div>
+	
+	<span id="majorLoad"></span>
+  
+  <div class="form-group mb-3">
+    <select class="selectpicker" title="Visibility" data-width="100%">
+      <option>Public</option>
+      <option>Unlisted (Invite Only)</option>
+	  <option>Hidden</option>
+	  <option>Time Deployed?</option>
+	</select>
+  </div>
+  
+  <div class="form-group row">
+    <label for="total" class="col-sm-9 col-form-label">Registration Lockout Date:</label>
+    <div class="col-sm-3">
+      <input type="date" class="form-control" id="date">
+    </div>
+  </div>
+
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" value="" id="locked">
+	  <label class="form-check-label" for="locked" data-toggle="tooltip" data-placement="right" title="You must manually accept applicants"> <i class="material-icons">lock</i>Locked?</label>
+  </div>
+  
+   <button type="submit" class="btn btn-primary float-right">Create</button>
+   
+	</div>
+	</form>
+	</main>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+<script type="text/javascript">
+<!--General Scripts, Put with includes
+-->
+<!--Tooltips-->
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+<!--SelectPicker-->
+$.fn.selectpicker.Constructor.BootstrapVersion = '4';
+</script>
+
+<script type="text/javascript">
+<!--Total Count-->
+var total = 0;
+var oldValue = 0;
+$('#majors').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+  var major = $('#majors').val();
+  if(previousValue == "") {
+     $("#majorLoad").append("<div class='form-group row'><label for='total' class='col-sm-9 col-form-label'>Total Team Size: </label><div class='col-sm-3'><input type='number' class='form-control' id='total'></div></div>");
+  }
+  
+  if($("#" + major.toLowerCase()).length == 0) {
+	oldValue = 0;
+  $("#majorLoad").prepend("<div class='form-group row'><label for='" + major.toLowerCase() + "' class='col-sm-9 col-form-label'>" + major + ": </label><div class='col-sm-3'><input type='number' class='form-control memcount' id='" + major.toLowerCase() + "'></div></div>");
+  }
+  });
+
+$('body').on('focusin', 'input.memcount', function() {
+	if(!isNaN($(this).val()) && $(this).val() != "" ) {
+	oldValue = parseInt($(this).val());
+}
+});
+
+$('body').on('change', 'input.memcount', function() {
+	total -= oldValue;
+	total += parseInt($(this).val());
+	$("#total").val(total);
+});
+</script>
+
+
+	</body>
+</html>
