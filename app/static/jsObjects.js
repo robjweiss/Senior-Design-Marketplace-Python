@@ -35,7 +35,7 @@ function projectModal(id, title, desc, date, views, author, locked) {
 			<a class="nav-link" id="memberTab" data-toggle="tab" href="#member" role="tab" aria-controls="memberTab" aria-selected="false">Current Members</a>
 		</li>
 		</ul>
-	<div class="modal-content-tldr"><span class="infoSpan"><span class="material-icons" style="color:red">whatshot</span> ${views} views</span><span class="infoSpan">Created by: <a class='regularLink'>${author}</a> on ${date}</span><span class="infoSpan-last"><span class="material-icons" style="color:red">favorite</span>xxx</span></div>
+	<div class="modal-content-tldr"><span class="infoSpan"><span class="material-icons" style="color:red">whatshot</span> ${views} views</span><span class="infoSpan">Created by: <a class='regularLink'>${author}</a> ${date}</span><span class="infoSpan-last"><span class="material-icons" style="color:red">favorite</span>xxx</span></div>
 	<div class="container-fluid">
 	<div class="tab-content" id="myTabContent">
 	<!--General-->

@@ -4,7 +4,6 @@ from flask_migrate import Migrate
 from sqlalchemy.sql import select
 from config import app_config, Config, DevelopmentConfig
 import json
-from datetime import datetime
 db = SQLAlchemy()
 
 def create_app(config_name):

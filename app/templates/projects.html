@@ -123,16 +123,19 @@ Use none to make bigger
       </div>
 	<nav aria-label="...">
 	  <ul class="pagination justify-content-center">
-		<li class="page-item disabled">
-          <span class="page-link">Previous</span>
+		<li class="page-item" id="prevli">
+          <a class="page-link pagin" href="#" id="prev">Previous</a></span>
 		</li>
-		<li class="page-item active"><a class="page-link" href="#">1<span class="sr-only">(current)</span></a></li>
-		<li class="page-item">
-			<span class="page-link">2</span>
+		<li class="page-item" id='p1'><a class="page-link" href="#p1">1</a></li>
+		<li class="page-item" id='p2'>
+			<a class="page-link pagin" href="#p2">2</a>
     </li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item">
-		  <a class="page-link" href="#">Next</a>
+		<li class="page-item" id='p3'>
+			<a class="page-link pagin" href="#p3">3</a>
+    </li>
+	
+		<li class="page-item" id="nextli">
+		 <a class="page-link pagin" href="#" id='next'>Next</a>
 		</li>
 	  </ul>
 	</nav>
@@ -156,6 +159,9 @@ $.fn.selectpicker.Constructor.BootstrapVersion = '4';
 </script>
 <script>
 projects = {{ projects |tojson }};
+page = 1;
+pageTotal = 0;
+
 projects.forEach(function(x, i) {
 id = x[0];
 title = x[1];
@@ -173,8 +179,64 @@ locked = "";
 }
 $(".card-deck").append(projectCard(id, title, desc, date, locked));
 $(".modal-container").append(projectModal(id, title, desc, date, views, author, locked));
-if(i % 3) {}
+if(i % 3) {
+pageTotal++;
+} else if(i < 3) {
+pageTotal = 1;
+}
 });
+
+<!--Page change function-->
+function pageChange(page, dir, init) {
+init = init || false;
+dir = dir || 0;
+$("#p" + page).addClass('active');
+$("#page-link[href=p" + page + "]").append("<span class='sr-only'>(current)</span>");
+if(init == false) {
+remove = page + dir;
+$("#p" + remove).removeClass("active");
+$("#page-link[href=p" + page + "]").remove("span#class-only");
+}
+
+}
+pageChange(page,0,true);
+if(page == 1) {
+$("#prevli").addClass("disabled");
+} 
+if(page == pageTotal) {
+$("#nextli").addClass("disabled");
+}
+<!--Start Keypress->
+$(document).on("keydown", function(event) {
+<!--Backward-->
+if(event.which == 37) {
+page--;
+if(page <= 0) {
+page = 1;
+}
+pageChange(page,1);
+<!--Forward-->
+} else if(event.which == 39) {
+page++;
+if(page > pageTotal) {
+page = pageTotal;
+}
+pageChange(page,-1);
+}
+<!--Events regardless of which keypress-->
+if(page == 1) {
+$("#prevli").addClass("disabled");
+} else if($("#prevli").hasClass("disabled")){
+$("#prevli").removeClass("disabled");
+}
+if(page == pageTotal) {
+$("#nextli").addClass("disabled");
+} else if($("#nextli").hasClass("disabled")){
+$("#nextli").removeClass("disabled");
+}
+});
+<!--End Keypress-->
+<!--Favorite button on modal-->
 $("#favButton").on('click', function() {
 if($("#favText").html() == "favorite") {
 $("#favText").html("favorite_border");
