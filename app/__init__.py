@@ -6,7 +6,6 @@ from config import app_config, Config, DevelopmentConfig
 import json
 from datetime import datetime
 db = SQLAlchemy()
-from .projects.models import Project
 
 def create_app(config_name):
 	# WSGI application object
@@ -16,7 +15,7 @@ def create_app(config_name):
 	db.init_app(app)
 
 
-	# FIXME: These should be moved to the module __init__.py files
+	# FIXME: These should be moved to the modules
 	@app.route('/')
 	def index():
 		return render_template('index.html')
@@ -24,18 +23,6 @@ def create_app(config_name):
 	@app.route('/admin')
 	def professors():
 		return render_template('admin.html')
-
-	@app.route('/projects')
-	def projects():
-		project = []
-		result = Project.query.all()
-		for row in result:
-			#If the date is today, it gives the time in AM/PM, otherwise gives the date in m/d/Y
-			dateSwitcher = "on " + row.date.strftime('%m/%d/%Y')
-			if datetime.today().strftime('%m/%d/%Y') == row.date.strftime('%m/%d/%Y'):
-				dateSwitcher = "at " + row.date.strftime('%I:%M%p')
-			project.append([row.id, row.title, row.desc, row.author, dateSwitcher, row.views, row.visibility, row.sponsors, row.locked])
-		return render_template('projects.html', projects=project)
 
 	@app.route('/createProject')
 	def createProject():
@@ -50,5 +37,8 @@ def create_app(config_name):
 		return render_template('createProposal.html')
 
 	migrate = Migrate(app, db)
+
+	from .projects import projects as projects_blueprint
+	app.register_blueprint(projects_blueprint, url_prefix='/projects')
 
 	return app
