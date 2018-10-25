@@ -4,7 +4,6 @@ from flask_migrate import Migrate
 from sqlalchemy.sql import select
 from config import app_config, Config, DevelopmentConfig
 import json
-from datetime import datetime
 db = SQLAlchemy()
 
 def create_app(config_name):
@@ -28,17 +27,14 @@ def create_app(config_name):
 	def createProject():
 		return render_template('createProject.html')
 
-	@app.route('/view')
-	def view():
-		return render_template('view.html')
-
 	@app.route('/createProposal')
 	def proposal():
 		return render_template('createProposal.html')
 
-	migrate = Migrate(app, db)
+	migrate = Migrate(app, db, compare_type=True)
 
 	from .projects import projects as projects_blueprint
 	app.register_blueprint(projects_blueprint, url_prefix='/projects')
-
+	from .projects import view as view_blueprint
+	app.register_blueprint(view_blueprint, url_prefix='/view')
 	return app

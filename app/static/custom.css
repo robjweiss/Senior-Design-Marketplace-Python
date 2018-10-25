@@ -27,7 +27,7 @@ border: 1px solid transparent !important;
 	-moz-box-shadow: none !important;
 box-shadow: none !important;
 }
-.nav-link:hover {
+.nav-link:hover{
 	color:rgba(112, 15, 38, 1);
 }
 .page-link, .nav-link {
@@ -45,10 +45,11 @@ color:white !important;
 padding:1rem;
 }
 .material-icons {
-font-size:18px !important;
+font-size:18px;
 display: inline-flex !important;
 vertical-align: middle !important;
 }
+
 .nav-pills {
 border-bottom: 1px solid #e9ecef;
 padding: 0rem .5rem 1rem .5rem;
@@ -81,4 +82,39 @@ a.regularLink {
 }
 .pictureAlign {
 	text-align:center;
+}
+.pagin:hover {
+		color:rgba(112, 15, 38, 1) !important;
+}
+.card-deck {
+	padding-top: 1rem;
+	flex-flow: column !important;
+    column-count: 3;
+  }
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%239D1535' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%239D1535' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+img {
+	margin:auto;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printQR, .material-icons {
+	visibility: hidden !important;
+  }
+  #qrTest * {
+    visibility: visible;
+  }
+  #qrTest {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
