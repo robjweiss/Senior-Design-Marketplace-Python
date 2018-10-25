@@ -57,19 +57,7 @@
     </nav>
 
     <main role="main" class="container">
-<div class="card text-center">
-  <div class="card-header">
-    Featured
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-  <div class="card-footer text-muted">
-    2 days ago
-  </div>
-</div>
+  
 	</main>
 	</body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -77,13 +65,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+<script src="{{url_for('static', filename='./qrcode/qrcode.js') }}"></script>
+<script src="{{url_for('static', filename='jsObjects.js') }}"></script>
+
 <script type="text/javascript">
-<!--General Scripts, Put with includes
--->
+
+<!--General Scripts, Put with includes-->
 <!--Tooltips-->
+var p = {{ info|tojson }};
+
+ $(window).on('load',function(){
+ if(p[8] == 1) {
+locked = "<i class='material-icons'>lock</i>";
+} else {
+locked = "";
+}
+ <!--[proj.id, proj.title, proj.desc, proj.author, dateSwitcher, proj.views, proj.visibility, proj.sponsors, proj.locked] - id, title, desc, date, views, author, locked, url-->
+ $("main").append(projectModal(p[0], p[1], p[2], p[4], p[5], p[3], locked, "http://localhost:5000/view/" + p[0]));
+        $('.viewCheck').modal('show');
+new QRCode($("#qrTest")[0], $("#qrTest").attr("href"));
+$("#qrTest").append("<i class='material-icons' style='color:#9D1535'>print</i><a class='regularLink' href='#' id='printQR'>Print me</a>");
+  
+$("#printQR").on("click", function() {
+window.print();
+});
+  });
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
+
 <!--SelectPicker-->
 $.fn.selectpicker.Constructor.BootstrapVersion = '4';
 </script>
